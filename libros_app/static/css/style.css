@@ -1,0 +1,12 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#div_container {
+    background-color: gray;
+}
+
+.li {
+    display: grid;
+}
