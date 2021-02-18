@@ -7,6 +7,9 @@ class Libro(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.titulo
+
 class Autor(models.Model):
     nombre = models.CharField(max_length=255, null=True)
     apellido = models.CharField(max_length=255, null=True)
@@ -14,3 +17,6 @@ class Autor(models.Model):
     libros = models.ManyToManyField(Libro, related_name="autores")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.nombre + " " + self.apellido
