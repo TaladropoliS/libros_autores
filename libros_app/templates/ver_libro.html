@@ -24,8 +24,8 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-md navbar-dark bg-success">
         <div class="container-fluid mx-5">
-            <a class="navbar-brand" href="#">
-                <img src="../static/img/logo_libros.png" width="250px" alt="Libros&Autores">
+            <a class="navbar-brand" href="/">
+                <img src="../static/img/logo_libros_y_autores.png" width="250px" alt="Libros&Autores">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,14 +34,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="../templates/index.html">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../templates/autores.html">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Libros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="autores">Autores</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- FIN NAVBAR -->
-    <div class="row mt-5 mb-0 ms-5">
+    <div class="row mt-5 mb-4 ms-5">
         <div class="col ms-5">
             <img class="ms-5" src="../static/img/libro.png" width="100px" alt="libro">
         </div>
@@ -50,11 +50,12 @@
         <div class="row">
             <div class="col-sm-8 pt-3 ms-5">
                 <h3 class="text-black-75">Libro: {{ titulo }}</h3>
-
+                <h3 class="text-black-75">ID: {{ id.libro }}</h3>
+                <h3 class="text-black-75">Descripción: {{ desc }}</h3>
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
-                <form id="agregar_libro" action="add" method="post"> {% csrf_token %}>
+                <form id="agregar_libro" action="add" method="post"> {% csrf_token %}
                     <div class="mb-3 p-2">
                         <label for="titulo" class="form-label">Nombre</label>
                         <input type="text" id="titulo" class="form-control" placeholder="Ingresar título del libro" required>
@@ -109,7 +110,7 @@
                 <div class="col text-center font-weight-light text-light">
                     <p>* * *</p>
                     <p>Fullstack Python 2020 - 2021</p>
-                    <p>Libros y Autores - © TaladropoliS</p>
+                    <p>Libros y Autores © TaladropoliS</p>
                 </div>
             </div>
             <div class="row"></div>
