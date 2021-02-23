@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Libros</a></li>
-                    <li class="nav-item"><a class="nav-link" href="autores">Autores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/agregar_autor">Autores</a></li>
                 </ul>
             </div>
         </div>
@@ -49,14 +49,16 @@
     <div class="container-lg bg-light mb-5">
         <div class="row">
             <div class="col-sm-8 pt-3 ms-5">
-                <h3 class="text-black-75">Autor: {{ autor.nombre }} {{ autor.apellido }}</h3>
-                <h5 class="text-black-75">ID: {{ libro.id }}</h5>
-                <h6 class="text-black-75">Descripción: {{ libro.desc }}</h6>
+                <h4 class="text-black-75">ID: <b>{{ id }}</b></h4>
+                <h4 class="text-black-75">Autor: <b>{{ nombre }} {{ apellido }}</b></h4>
+                <h4 class="text-black-75">Notas: <b>{{ notas }}</b></h4><br>
+                <h4>Libros:</h4>
 
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
-                <h3>Libros de este Autor:</h3>
+                <br>
+                <h5>Agregar un Libro a este Autor:</h5>
                 <div class="col">
                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option selected>Seleccione Libro</option>

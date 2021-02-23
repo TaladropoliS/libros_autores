@@ -55,18 +55,24 @@
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
-                <form id="agregar_libro" action="add" method="post"> {% csrf_token %}
+                <form id="agregar_autor" action="agregar_autor" method="post"> {% csrf_token %}
                     <div class="mb-3 p-2">
-                        <label for="titulo" class="form-label">Nombre</label>
-                        <input type="text" id="titulo" class="form-control" placeholder="Ingresar título del libro" required>
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <div class="text-center bg-danger">{% if messages %} {% for message in messages %} <b>{{message}}</b> {% endfor %} {% endif %}
+                        </div>
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresar nobre del Autor" required>
 
-                        <label for="titulo" class="form-label">Apellido</label>
-                        <input type="text" id="titulo" class="form-control" placeholder="Ingresar título del libro" required>
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <div class="text-center bg-danger">{% if messages %} {% for message in messages %} <b>{{message}}</b> {% endfor %} {% endif %}
+                        </div>
+                        <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Ingresar apellido del Autor" required>
 
                         <label for="descripcion" class="form-label mt-4">Notas</label>
-                        <textarea name="descripcion" id="desc" cols="30" rows="7" class="form-control" placeholder="Ingresar descripción del libro" required></textarea>
+                        <div class="text-center bg-danger">{% if messages %} {% for message in messages %} <b>{{message}}</b> {% endfor %} {% endif %}
+                        </div>
+                        <textarea name="notas" id="notas" cols="30" rows="7" class="form-control" placeholder="notas del Autor" required></textarea>
                     </div>
-                    <input type="submit" name="agregar" value="Agregar" class="btn btn-success m-l-4"></button>
+                    <input type="submit" name="agregar_autor" value="Agregar Autor" class="btn btn-success m-l-4"></button>
                 </form>
             </div>
 
@@ -85,13 +91,13 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for autor in autores %}
                             <tr>
-                                <th scope="row">{{ id }}</th>
-                                <td> {{ titulo }}</td>
-                                <td>
-                                    <a href="ver_autor" class=""></a>
-                                </td>
+                                <td>{{ autor.id }}</td>
+                                <td>{{ autor.nombre }} {{ autor.apellido }}</td>
+                                <td><a href="/ver_autor/{{ autor.id }}">ver</a></td>
                             </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

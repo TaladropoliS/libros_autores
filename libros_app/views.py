@@ -4,23 +4,21 @@ from django.contrib import messages
 # Create your views here.
 
 def inicio(request):
-    if 'inicio' in request.session: # ve si ya se ha entrado a la sesión.
+    if 'inicio' in request.session: # ve si ya se ha ingresó a la página.
 
         error = {}  # se crea vacío para poder enviar mensaje de error más abajo.
         if 'titulo' in request.POST:
             if len(request.POST['titulo']) > 0:  # verifica si 'titulo' esta vacío.
-                # if 'titulo' in request.POST:
-                # print(request.POST['titulo'])
-                add_libro = Libro.objects.create(  # se crea el libro y la descripción
-                    titulo=request.POST['titulo'],
-                    desc=request.POST['desc'],
-                )
+                if len(request.POST['desc']) > 0: # verifica si 'desc' esta vacío.
+                    add_libro = Libro.objects.create(titulo=request.POST['titulo'], desc=request.POST['desc'])
+                else:  # se comprueba el error y se entrega un mensaje.
+                    error['falta_dato'] = ". . . . . < < < debe ingresar Título y Descripción > > > . . . . ."
             else:  # se comprueba el error y se entrega un mensaje.
-                error['titulo'] = "* * * | | | El título no ha sido ingresado | | | * * *"
+                error['falta_dato'] = ". . . . . < < < debe ingresar Título y Descripción > > > . . . . ."
             if len(error) > 0:
                 for key, msg in error.items():
                     messages.error(request, msg)
-                # return redirect('/')
+
     request.session['inicio'] = True
 
     libros = Libro.objects.all()
@@ -29,29 +27,41 @@ def inicio(request):
     }
     return render(request, 'index.html', context)
 
-# def agregar_libro(request):
-#     Libro.objects.create(titulo=request.POST['titulo'], desc=request.POST['desc'])
-#     autores = Libro.objects.all()
-#     context = {
-#         "autores": Libro.objects.all()
-#     }
-#     return render(request, 'index.html', context)
-
-def agregar_libro(request):
-    Libro.objects.create(titulo=request.POST['titulo'], desc=request.POST['desc'])
-    return render(redirect(''))
-
 def autores(request):
-    autores = Libro.objects.all()
+    if 'agregar_autor' in request.session: # ve si ya se ha ingresó a la página.
+
+        error = {}  # se crea vacío para poder enviar mensaje de error más abajo.
+        if 'nombre' in request.POST:
+            if len(request.POST['nombre']) > 0:  # verifica si 'nombre' esta vacío.
+                if len(request.POST['apellido']) > 0:  # verifica si 'apellido' esta vacío.
+                    if len(request.POST['notas']) > 0:  # verifica si 'notas' esta vacío.
+                        add_autor = Autor.objects.create(nombre=request.POST['nombre'], apellido=request.POST['apellido'], notas=request.POST['notas'])
+                    else:  # se comprueba el error y se entrega un mensaje.
+                        error['falta_dato'] = ". . . . . < < < debe ingresar Nombre, Apellido y Notas > > > . . . . ."
+                else:  # se comprueba el error y se entrega un mensaje.
+                    error['falta_dato'] = ". . . . . < < < debe ingresar Nombre, Apellido y Notas > > > . . . . ."
+            else:  # se comprueba el error y se entrega un mensaje.
+                error['falta_dato'] = ". . . . . < < < debe ingresar Nombre, Apellido y Notas > > > . . . . ."
+
+            if len(error) > 0:
+                for key, msg in error.items():
+                    messages.error(request, msg)
+
+    request.session['agregar_autor'] = True
+
+    autores = Autor.objects.all()
     context = {
-        "autores": Libro.objects.all()
+        "autores": Autor.objects.all()
     }
     return render(request, 'autores.html', context)
 
-def ver_autor(request):
-    a = Libro.objects.id(id=id)
+def ver_autor(request,id):
+    temp = Autor.objects.get(id=id)
     context = {
-        "autores": a
+        "id": temp.id,
+        "nombre": temp.nombre,
+        "apellido": temp.apellido,
+        "notas": temp.notas
     }
     return render(request, 'ver_autor.html', context)
 
