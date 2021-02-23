@@ -58,6 +58,7 @@ def autores(request):
 def ver_autor(request,id):
     temp = Autor.objects.get(id=id)
     context = {
+        "libros": Libro.objects.all(),
         "id": temp.id,
         "nombre": temp.nombre,
         "apellido": temp.apellido,
@@ -65,11 +66,19 @@ def ver_autor(request,id):
     }
     return render(request, 'ver_autor.html', context)
 
-def ver_libro(request,id):
-    temp = Libro.objects.get(id=id)
+def ver_libro(request, id):
+    temp_l = Libro.objects.get(id=id)
     context = {
-        "titulo": temp.titulo,
-        "id": temp.id,
-        "desc": temp.desc,
+        "autores": Autor.objects.all(),
+        "titulo": temp_l.titulo,
+        "id": temp_l.id,
+        "desc": temp_l.desc,
     }
     return render(request, 'ver_libro.html', context)
+
+def autor_del_libro(request):
+    temp_a = Autor.objects.get(id=request.POST['autor_del_libro'])
+    temp_l = Libro.objects.get(id=id)
+    temp_l.autores.add(temp_a)
+    print('id')
+    return redirect('/ver_libro/{id}')

@@ -52,25 +52,31 @@
                 <h4 class="text-black-75">ID: <b>{{ id }}</b></h4>
                 <h4 class="text-black-75">Libro: <b>{{ titulo }}</b></h4>
                 <h4 class="text-black-75">Descripción: <b>{{ desc }}</b></h4><br>
-                <h4>Autores:</h4>
-
-
+                <h4>Autores:<b>{{ nombre }} {{ apellido }}</b></h4>
+                <ul>
+                    {% for x in autores %}
+                    <li>{{ x.nombre }} {{ x.apellido }}</li>
+                    {% endfor %}
+                </ul>
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
                 <br>
                 <h5>Agregar un Autor a este Libro:</h5>
-                <div class="col">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Seleccione un Autor</option>
-                        <option value="1">Uno</option>
-                        <option value="2">Dos</option>
-                        <option value="3">Tres</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <button class="btn btn-success mt-3" type="submit">Agregue este Autor al Libro</button>
-                </div>
+                <form id="agregar_autor_del_libro" name="agregar_autor_del_libro" action="/ver_libro/{{ id }}" method="post"> {% csrf_token %}
+                    <div class="col">
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option selected>Seleccione un Autor</option>
+                                {% for x in autores %}
+                                <option value="{{ x.id }}">
+                                    {{ x.nombre }} {{ x.apellido }}
+                                </option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" id="autor_del_libro" name="autor_del_libro" value="Agregue este Autor al Libro" class="btn btn-success m-l-4"></button>
+                </form>
+
             </div>
         </div>
     </div>

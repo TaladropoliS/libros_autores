@@ -53,23 +53,29 @@
                 <h4 class="text-black-75">Autor: <b>{{ nombre }} {{ apellido }}</b></h4>
                 <h4 class="text-black-75">Notas: <b>{{ notas }}</b></h4><br>
                 <h4>Libros:</h4>
-
+                <ul>
+                    {% for x in libros %}
+                    <li>{{ x.titulo }}</li>
+                    {% endfor %}
+                </ul>
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
                 <br>
                 <h5>Agregar un Libro a este Autor:</h5>
-                <div class="col">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Seleccione Libro</option>
-                        <option value="1">Uno</option>
-                        <option value="2">Dos</option>
-                        <option value="3">Tres</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <button class="btn btn-success mt-3" type="submit">Agregue este Libro al Autor</button>
-                </div>
+                <form id="agregar_libro_al_autor" name="agregar_libro_al_autor" action="/ver_autor/{{ id }}" method="post"> {% csrf_token %}
+                    <div class="col">
+                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option selected>Seleccione un Libro</option>
+                                {% for x in libros %}
+                                <option value="{{ x.id }}">
+                                    {{ x.titulo }}
+                                </option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" id="autor_del_libro" name="autor_del_libro" value="Agregue este Autor al Libro" class="btn btn-success m-l-4"></button>
+                </form>
             </div>
         </div>
     </div>
