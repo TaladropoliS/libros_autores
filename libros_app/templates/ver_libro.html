@@ -49,54 +49,28 @@
     <div class="container-lg bg-light mb-5">
         <div class="row">
             <div class="col-sm-8 pt-3 ms-5">
-                <h3 class="text-black-75">Libro: {{ titulo }}</h3>
-                <h3 class="text-black-75">ID: {{ id.libro }}</h3>
-                <h3 class="text-black-75">Descripción: {{ desc }}</h3>
+                <h4 class="text-black-75">Libro: <b>{{ titulo }}</b></h4>
+                <h4 class="text-black-75">ID: <b>{{ id }}</b></h4>
+                <h4 class="text-black-75">Descripción: <b>{{ desc }}</b></h4><br>
+                <h4>Autores:</h4>
+
+
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
-                <form id="agregar_libro" action="add" method="post"> {% csrf_token %}
-                    <div class="mb-3 p-2">
-                        <label for="titulo" class="form-label">Nombre</label>
-                        <input type="text" id="titulo" class="form-control" placeholder="Ingresar título del libro" required>
-
-                        <label for="titulo" class="form-label">Apellido</label>
-                        <input type="text" id="titulo" class="form-control" placeholder="Ingresar título del libro" required>
-
-                        <label for="descripcion" class="form-label mt-4">Notas</label>
-                        <textarea name="descripcion" id="desc" cols="30" rows="7" class="form-control" placeholder="Ingresar descripción del libro" required></textarea>
-                    </div>
-                    <input type="submit" name="agregar" value="Agregar" class="btn btn-primary m-l-4"></button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 pt-3">
-                <h3 class="text-center">Lista de AUTORES</h3>
-
-                <!-- TABLA QUE MUESTRA LOS LIBROS y PERMITE IR A CADA LIBRO -->
-
-                <div class="mb-3 p-2">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Autor</th>
-                                <th scope="col">Ver</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">{{ id }}</th>
-                                <td> {{ titulo }}</td>
-                                <td>
-                                    <a href="enviar a la web que muestra la info del libro" class=""></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <br>
+                <h5>Agregar un Autor a este Libro:</h5>
+                <div class="col">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Seleccione un Autor</option>
+                        <option value="1">Uno</option>
+                        <option value="2">Dos</option>
+                        <option value="3">Tres</option>
+                    </select>
                 </div>
-
+                <div class="col">
+                    <button class="btn btn-success mt-3" type="submit">Agregue este Autor al Libro</button>
+                </div>
             </div>
         </div>
     </div>
