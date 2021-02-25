@@ -52,21 +52,24 @@
                 <h4 class="text-black-75">ID: <b>{{ id }}</b></h4>
                 <h4 class="text-black-75">Libro: <b>{{ titulo }}</b></h4>
                 <h4 class="text-black-75">Descripción: <b>{{ desc }}</b></h4><br>
-                <h4>Autores:<b>{{ nombre }} {{ apellido }}</b></h4>
+                <h4>Autores:</h4>
+
                 <ul>
-                    {% for x in autores %}
+                    {% for x in autores_del_libro %}
                     <li>{{ x.nombre }} {{ x.apellido }}</li>
                     {% endfor %}
                 </ul>
+
+
                 <!-- FORMULARIO DE INGRESO DE LIBRO -->
                 <!-- action = Nombre del views de Django que procesa la información enviada desde el formulario -->
 
                 <br>
                 <h5>Agregar un Autor a este Libro:</h5>
-                <form id="agregar_autor_del_libro" name="agregar_autor_del_libro" action="/ver_libro/{{ id }}" method="post"> {% csrf_token %}
+                <form id="agregar_autor_del_libro" name="agregar_autor_del_libro" action="/autor_del_libro/{{ id }}" method="post"> {% csrf_token %}
                     <div class="col">
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option selected>Seleccione un Autor</option>
+                        <select name="id" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                            <option value="" selected>Seleccione un Autor</option>
                                 {% for x in autores %}
                                 <option value="{{ x.id }}">
                                     {{ x.nombre }} {{ x.apellido }}
@@ -88,9 +91,7 @@
         <div class="container w-50">
             <div class="row justify-content-md-center py-4">
                 <div class="col text-center font-weight-light text-light">
-                    <p>* * *</p>
-                    <p>Fullstack Python 2020 - 2021</p>
-                    <p>Libros y Autores © TaladropoliS</p>
+                    <p>* * * | Fullstack Python 2020 - 2021 | Libros y Autores © TaladropoliS | * * *</p>
                 </div>
             </div>
             <div class="row"></div>

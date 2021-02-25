@@ -54,7 +54,7 @@
                 <h4 class="text-black-75">Notas: <b>{{ notas }}</b></h4><br>
                 <h4>Libros:</h4>
                 <ul>
-                    {% for x in libros %}
+                    {% for x in libros_del_autor %}
                     <li>{{ x.titulo }}</li>
                     {% endfor %}
                 </ul>
@@ -63,10 +63,10 @@
 
                 <br>
                 <h5>Agregar un Libro a este Autor:</h5>
-                <form id="agregar_libro_al_autor" name="agregar_libro_al_autor" action="/ver_autor/{{ id }}" method="post"> {% csrf_token %}
+                <form id="agregar_libro_al_autor" name="agregar_libro_al_autor" action="/libro_del_autor/{{ id }}" method="post"> {% csrf_token %}
                     <div class="col">
-                        <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                            <option selected>Seleccione un Libro</option>
+                        <select name="id" class="form-select form-select-sm" aria-label=".form-select-sm example" required>
+                            <option value="" selected>Seleccione un Libro</option>
                                 {% for x in libros %}
                                 <option value="{{ x.id }}">
                                     {{ x.titulo }}
@@ -74,7 +74,7 @@
                                 {% endfor %}
                         </select>
                     </div>
-                    <input type="submit" id="autor_del_libro" name="autor_del_libro" value="Agregue este Autor al Libro" class="btn btn-success m-l-4"></button>
+                    <input type="submit" id="libro_del_autor" name="libro_del_autor" value="Agregue este Libro al Autor" class="btn btn-success m-l-4"></button>
                 </form>
             </div>
         </div>
@@ -87,9 +87,7 @@
         <div class="container w-50">
             <div class="row justify-content-md-center py-4">
                 <div class="col text-center font-weight-light text-light">
-                    <p>* * *</p>
-                    <p>Fullstack Python 2020 - 2021</p>
-                    <p>Libros y Autores © TaladropoliS</p>
+                    <p>* * * | Fullstack Python 2020 - 2021 | Libros y Autores © TaladropoliS | * * *</p>
                 </div>
             </div>
             <div class="row"></div>

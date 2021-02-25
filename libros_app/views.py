@@ -55,30 +55,51 @@ def autores(request):
     }
     return render(request, 'autores.html', context)
 
-def ver_autor(request,id):
-    temp = Autor.objects.get(id=id)
+def ver_autor(request, id):
+    temp_a = Autor.objects.get(id=id)
+    temp_all = Libro.objects.all().exclude(autores__id=id)
+    temp_l_del_autor = Libro.objects.all().filter(autores__id=id)
+
     context = {
-        "libros": Libro.objects.all(),
-        "id": temp.id,
-        "nombre": temp.nombre,
-        "apellido": temp.apellido,
-        "notas": temp.notas
+        "libros_del_autor": temp_l_del_autor,
+        "id": temp_a.id,
+        "nombre": temp_a.nombre,
+        "apellido": temp_a.apellido,
+        "notas": temp_a.notas,
+        "libros": temp_all
     }
     return render(request, 'ver_autor.html', context)
 
 def ver_libro(request, id):
     temp_l = Libro.objects.get(id=id)
+    temp_all = Autor.objects.all().exclude(libros__id=id)
+    temp_a_del_libro = Autor.objects.all().filter(libros__id=id)
     context = {
-        "autores": Autor.objects.all(),
+        "autores_del_libro": temp_a_del_libro,
+        "autores": temp_all,
         "titulo": temp_l.titulo,
         "id": temp_l.id,
         "desc": temp_l.desc,
     }
     return render(request, 'ver_libro.html', context)
 
-def autor_del_libro(request):
-    temp_a = Autor.objects.get(id=request.POST['autor_del_libro'])
-    temp_l = Libro.objects.get(id=id)
+def autor_del_libro(request, _id):
+    temp_a = Autor.objects.get(id=request.POST['id'])
+    temp_l = Libro.objects.get(id=_id)
     temp_l.autores.add(temp_a)
-    print('id')
-    return redirect('/ver_libro/{id}')
+    context = {
+        "autores": Autor.objects.all(),
+        "nombre": Autor.objects.all(),
+        "apellido": Autor.objects.all(),
+    }
+    return redirect(f'/ver_libro/{_id}')
+
+def libro_del_autor(request, _id):
+    temp_l = Libro.objects.get(id=request.POST['id'])
+    temp_a = Autor.objects.get(id=_id)
+    temp_a.libros.add(temp_l)
+    context = {
+        "libros": Libro.objects.all(),
+        "titulo": Libro.objects.all(),
+    }
+    return redirect(f'/ver_autor/{_id}')
