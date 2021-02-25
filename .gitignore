@@ -1,4 +1,8 @@
 */__pycache__/*
+__pycache__/
+.vscode/
+.vscode
+env/
+venv/
 db.sqlite3
 *.psd
-00_tarea_dojo_ninjas_proj.txt
